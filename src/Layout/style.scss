@@ -1,0 +1,59 @@
+@import "~@vtfk/components/src/ui/Tokens/tokens.scss";
+
+.layout {
+  height: 100%;
+
+  .header {
+    background-color: #ebe6d6;
+    position: fixed;
+    display: flex;
+    top: 0;
+    width: 100%;
+    height: 65px;
+    padding-top: 5px;
+    padding-left: 10px;
+    box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 10 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+
+    .logo {
+      display: flex;
+      flex-grow: 1;
+      align-items: center;
+
+      .text {
+        padding-left: 15px;
+      }
+    }
+
+    .icon-dropdown-nav {
+      display: flex;
+      gap: 24px;
+      margin-right: 24px;
+      align-self: center;
+    }
+  }
+
+  .content {
+    color: green;
+    margin-top: 85px;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+  }
+
+  .footer {
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #005260;
+    color: #FFFFFF;
+
+    .text {
+      align-self: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
