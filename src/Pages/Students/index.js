@@ -8,7 +8,7 @@ import { Layout } from  '../../Layout'
 import './style.scss'
 
 export function Students () {
-  const { items, itemsOptions, loading, setItemsOptions } = useAPI('token', 'students', ['fullName', 'mainGroupName'])
+  const { items, itemsOptions, loading, setItemsOptions } = useAPI('students', ['fullName', 'mainGroupName'])
 
   const headers = [
     {

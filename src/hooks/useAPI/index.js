@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
-import axios from 'axios'
+import { useSession } from '@vtfk/react-msal'
 import { orderBy } from 'lodash'
 
 import { API } from '../../config'
 
-export function useAPI (token, endpoint, itemProps = []) {
+export function useAPI (endpoint, itemProps = []) {
+  const { apiGet } = useSession()
   const [_items, setItems] = useState([])
   const [itemsOptions, setItemsOptions] = useState({})
   const [loading, setLoading] = useState(false)
@@ -13,13 +14,7 @@ export function useAPI (token, endpoint, itemProps = []) {
     const getItems = async () => {
       setLoading(true)
       try {
-        const options = {
-          headers: {
-            Authorization: token
-          }
-        }
-
-        const { data } = await axios.get(`${API.URL}/${endpoint}`, options)
+        const data = await apiGet(`${API.URL}/${endpoint}`)
         setItems(data)
       } catch (error) {
         console.log('Failed to get items from', endpoint)
@@ -30,7 +25,7 @@ export function useAPI (token, endpoint, itemProps = []) {
     }
 
     getItems()
-  }, [token, endpoint])
+  }, [endpoint]) // eslint-disable-line
 
   const options = useMemo(() => {
     return {

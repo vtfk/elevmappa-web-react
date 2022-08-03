@@ -24,11 +24,15 @@
       }
     }
 
-    .icon-dropdown-nav {
+    nav {
       display: flex;
       gap: 24px;
       margin-right: 24px;
       align-self: center;
+
+      .icon-dropdown-nav {
+        align-self: center;
+      }
     }
   }
 
