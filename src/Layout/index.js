@@ -1,6 +1,6 @@
 import { Icon, IconDropdownNav, IconDropdownNavItem } from '@vtfk/components'
 
-import config from '../config'
+import { config } from '../config'
 
 import './style.scss'
 
