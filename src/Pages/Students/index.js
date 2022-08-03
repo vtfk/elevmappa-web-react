@@ -1,14 +1,14 @@
 import { SearchField, Table } from '@vtfk/components'
 import { isEqual } from 'lodash'
+import { useNavigate } from 'react-router-dom'
 
 import { useAPI } from '../../hooks/useAPI'
-
-import { Layout } from  '../../Layout'
 
 import './style.scss'
 
 export function Students () {
   const { items, itemsOptions, loading, setItemsOptions } = useAPI('students', ['fullName', 'mainGroupName'])
+  const navigate = useNavigate()
 
   const headers = [
     {
@@ -34,8 +34,7 @@ export function Students () {
   const handleStudentClick = ids => {
     if (!Array.isArray(ids) || ids.length === 0) return
 
-    /* TODO: make this a router navigate */
-    window.location.pathname = `students/${ids[0]}`
+    navigate(`students/${ids[0]}`)
   }
 
   /* Features from old FrontEnd
@@ -45,7 +44,7 @@ export function Students () {
     - (cehck) click on a student sends them to the student view
   */
   return (
-    <Layout>
+    <>
       <SearchField
         debounceMs={100}
         loading={loading}
@@ -53,6 +52,7 @@ export function Students () {
         placeholder='Søk etter elev eller klasse'
         showClear={false} />
       
+      {/* TODO: Paginate table ? */}
       <Table
         headers={headers}
         items={items}
@@ -60,6 +60,6 @@ export function Students () {
         selectOnClick
         itemId='userName' /* this must be a unique property for all items */
         onSelectedIdsChanged={e => handleStudentClick(e)} />
-    </Layout>
+    </>
   )
 }

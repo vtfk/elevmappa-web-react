@@ -1,5 +1,3 @@
-import { Layout } from  '../../Layout'
-
 export function Student () {
   /* Features from old FrontEnd
     - Not paginated
@@ -9,8 +7,8 @@ export function Student () {
     - button opens document in a pdf viewer which doesn't allow you to right click and save
   */
   return (
-    <Layout>
+    <>
       Student
-    </Layout>
+    </>
   )
 }

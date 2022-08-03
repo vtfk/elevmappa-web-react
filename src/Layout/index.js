@@ -1,26 +1,29 @@
 import { Icon, IconDropdownNav, IconDropdownNavItem, InitialsBadge } from '@vtfk/components'
 import { useSession } from '@vtfk/react-msal'
+import { Routes, Route, useNavigate } from 'react-router-dom'
+
+import { Students } from '../Pages/Students'
+import { Student } from '../Pages/Student'
+import { File } from '../Pages/File'
+import { Help } from '../Pages/Help'
+import { NotFound } from '../Pages/NotFound'
 
 import { config } from '../config'
 
 import './style.scss'
 
-export function Layout ({ children }) {
-  const { isAuthenticated, user } = useSession()
-  /* Features from old FrontEnd
-    - Home button (house) (?)
-    - Help button (question mark)
-    - User button (dude) to log out and stuff
-  */
+export function Layout () {
+  const { isAuthenticated, logout, user } = useSession()
+  const navigate = useNavigate()
+
   return (
     <div className='layout'>
       <div className='header'>
         <div className='logo'>
-          { /* TODO: make this into a router link to home */}
-          <div className='image'>
+          <div className='image' onClick={() => navigate('/')}>
             <img alt='logo' src='/logo.png' height='40px' width='40px' />
           </div>
-          <div className='text'>
+          <div className='text' onClick={() => navigate('/')}>
             Elevmappa
           </div>
         </div>
@@ -30,27 +33,35 @@ export function Layout ({ children }) {
             <nav>
               <InitialsBadge firstName={user.givenName} lastName={user.surname} title={user.name} />
               <IconDropdownNav>
-                { /* TODO: add router links */}
                 <IconDropdownNavItem
+                  closeOnClick
                   icon={<Icon name='home' />}
-                  onClick={() => alert('Home min fetter!')}
+                  onClick={() => navigate('/')}
                   title='Hjem' />
                 <IconDropdownNavItem
+                  closeOnClick
                   icon={<Icon name='help' />}
-                  onClick={() => alert('Help min fetter!')}
+                  onClick={() => navigate('help')}
                   title='Hjelp' />
                 <IconDropdownNavItem
+                  closeOnClick
                   icon={<Icon name='lock' />}
-                  onClick={() => alert('Log out min fetter!')}
+                  onClick={() => logout()}
                   title='Logg av' />
               </IconDropdownNav>
             </nav>
         }
-
       </div>
 
       <div className='content'>
-        {children}
+        <Routes>
+          <Route path='/' element={<Students />} />
+          <Route path='/students/:id' element={<Student />} />
+          <Route path='/students/:id/:docId' element={<File />} />
+          <Route path='/help' element={<Help />} />
+
+          <Route path='/*' element={<NotFound />} />
+        </Routes>
       </div>
 
       <div className='footer'>

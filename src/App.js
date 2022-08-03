@@ -1,12 +1,17 @@
 import { useSession } from '@vtfk/react-msal'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { loginRequest } from './config'
 
-import { Students } from './Pages/Students'
+import { Layout } from './Layout'
 
 const AppContent = () => {
   return (
-    <Students />
+    <BrowserRouter>
+      <Routes>
+        <Route path='/*' element={<Layout />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
