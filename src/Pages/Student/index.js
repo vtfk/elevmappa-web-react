@@ -38,7 +38,6 @@ export function Student () {
   const [expandedDocument, setExpandedDocument] = useState('')
   const [documentFileLoading, setDocumentFileLoading] = useState('')
   const [numPages, setNumPages] = useState(0)
-  const [pageNumber] = useState(1)
   // items will be a object if all goes well. If an error occurs, items will be an empty array
   const { documents, getFile, items, itemsOptions, loading, setItemsOptions } = useAPI(`students/${id}`, 'displayDate', 'desc', ['title'])
 
@@ -175,9 +174,14 @@ export function Student () {
             title={`Dokumentvisning - ${documentFileLoading.file}`}
             onDismiss={() => { setDocumentFileLoading(''); setFileBase64(null) }}>
             <ModalBody>
-              <p>Page {pageNumber} of {numPages}</p> { /* TODO: Add possibility to switch between pages ? */ }
-              <Document file={`data:application/pdf;base64,${fileBase64}`} onContextMenu={e => e.preventDefault()} className='pdf-document' onLoadSuccess={onDocumentLoadSuccess}>
-                <Page pageNumber={pageNumber} scale={2} />
+              <p>{numPages} sider</p>
+              <Document file={`data:application/pdf;base64,${fileBase64}`} onContextMenu={e => e.preventDefault()} className='pdf-document' onLoadSuccess={onDocumentLoadSuccess} pageLayout=''>
+                {
+                  numPages > 0 && [...Array(numPages)].map((page, index) => <Page pageNumber={index + 1} scale={2} />)
+                }
+                {
+                  numPages === 0 && <span>🤔</span>
+                }
               </Document>
             </ModalBody>
           </Modal>
