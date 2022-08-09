@@ -1,6 +1,12 @@
 @import "~@vtfk/components/src/ui/Tokens/tokens.scss";
 
+.typography {
+  position: inherit;
+}
+
 .person-card {
+  position: inherit;
+
   .text-wrapper {
     .other {
       .extra-info {
