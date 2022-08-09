@@ -104,7 +104,7 @@ export function Student () {
                           expandedDocument === document.documentNumber && document.files.map(file => {
                             return (
                               <div className='file' key={document.documentNumber}>
-                                <Button size='small' disabled={documentFileLoading.recno === file.recno} onClick={() => { getDocumentFile(document, { file: file.file, recno: file.recno }) }} title='Klikk for å åpne filen'>
+                                <Button size='small' disabled={documentFileLoading.recno === file.recno} onClick={() => { getDocumentFile(document, { file: document.documentNumber, recno: file.recno }) }} title='Klikk for å åpne filen'>
                                   <div className='link-btn'>
                                     <Icon name='pdf' size='small' />
                                     {documentFileLoading.recno === file.recno ? 'Åpner dokumentet...' : file.title}
