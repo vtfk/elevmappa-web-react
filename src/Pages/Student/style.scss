@@ -32,7 +32,15 @@
     .document {
       background-color: #F5F5F5;
       box-shadow: 0 15px 13px 0 rgba(0, 0, 0, 0.1);
-      padding: 10px 0 10px 10px;
+      padding: 10px 10px 10px 10px;
+
+      .document-header {
+        font-weight: bold;
+        padding-bottom: 2px;
+        margin-bottom: 10px;
+        font-size: large;
+        border-bottom: 1px solid grey;
+      }
 
       & .icon > svg {
         display: inherit;
