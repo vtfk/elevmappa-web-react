@@ -7,7 +7,7 @@ import { useAPI } from '../../hooks/useAPI'
 import './style.scss'
 
 export function Students () {
-  const { items, itemsOptions, loading, setItemsOptions } = useAPI('students', ['fullName', 'mainGroupName'])
+  const { items, itemsOptions, loading, setItemsOptions } = useAPI('students', 'fullName', 'asc', ['fullName', 'mainGroupName'])
   const navigate = useNavigate()
 
   const headers = [
