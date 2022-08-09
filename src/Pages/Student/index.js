@@ -52,7 +52,6 @@ export function Student () {
     if (!data) console.error('AAAAAAAAAAHHHHHHH. File dreit på seg')
     else {
       setFileBase64(data.file)
-      console.log('I found the base64:', data)
     }
   }
 
