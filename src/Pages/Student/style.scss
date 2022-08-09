@@ -1,0 +1,113 @@
+@import "~@vtfk/components/src/ui/Tokens/tokens.scss";
+
+.person-card {
+  .text-wrapper {
+    .other {
+      .extra-info {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding-top: 8px;
+      }
+    }
+  }
+}
+
+.search-field {
+  margin-bottom: 25px;
+}
+
+.documents-container {
+  .documents {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    .document {
+      background-color: #F5F5F5;
+      box-shadow: 0 15px 13px 0 rgba(0, 0, 0, 0.1);
+      padding: 10px 0 10px 10px;
+
+      & .icon > svg {
+        display: inherit;
+      }
+
+      .toggle {
+        margin-top: 20px;
+      }
+
+      .info {
+        display: flex;
+        gap: 5px;
+        padding-bottom: 3px;
+
+        .info-header {
+          font-weight: bold;
+        }
+      }
+
+      .file {
+        margin-top: 10px;
+
+        &:nth-child(1) {
+          margin-top: 10px;
+        }
+
+        .link-btn {
+          display: flex;
+          gap: 5px;
+        }
+
+        .button {
+          padding-left: 28px;
+          padding-right: 28px;
+        }
+      }
+
+      .empty-file {
+        margin-top: 10px;
+        padding-left: 28px;
+      }
+
+      .link {
+        display: flex;
+        gap: 15px;
+        cursor: pointer;
+        padding-left: 30px;
+        color: $stein-3;
+      }
+    }
+  }
+
+  .pagination {
+    margin-top: 25px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+    .page {
+      //box-shadow: 0 15px 13px 0 rgba(0, 0, 0, 0.06);
+      border: 1px solid black;
+      padding: 8px 13px 8px 13px;
+      border-radius: 100%;
+      color: black;
+
+      &.active {
+        background-color: #005260;
+        color: white;
+      }
+    }
+  }
+}
+
+.error {
+  padding-top: 24px;
+  text-align: center;
+}
+
+@media print {
+  .pdf-document {
+    display: none;
+  }
+}
