@@ -4,7 +4,6 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 
 import { Students } from '../Pages/Students'
 import { Student } from '../Pages/Student'
-import { File } from '../Pages/File'
 import { Help } from '../Pages/Help'
 import { NotFound } from '../Pages/NotFound'
 
@@ -57,7 +56,6 @@ export function Layout () {
         <Routes>
           <Route path='/' element={<Students />} />
           <Route path='/students/:id' element={<Student />} />
-          <Route path='/students/:id/:docId' element={<File />} />
           <Route path='/help' element={<Help />} />
 
           <Route path='/*' element={<NotFound />} />
