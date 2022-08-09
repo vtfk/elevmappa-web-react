@@ -90,8 +90,8 @@ export function Student () {
                   documents.map((document, index) => {
                     return (
                       <div className='document' key={index}>
+                        <div className='document-header'>{document.title}</div>
                         <InfoProp header='Sendt dato' value={document.displayDate} />
-                        <InfoProp header='Tittel' value={document.title} />
                         <InfoProp header='Dok. nr.' value={`${document.documentNumber}${document.source ? ` (${document.source})` : ''}` || 'Ukjent'} />
                         <InfoProp header='Dokumentkategori' value={document.category || 'Ukjent'} />
                         <InfoProp header='Tilgangskode' value={document.accessCodeDescription || 'Ukjent'} />
