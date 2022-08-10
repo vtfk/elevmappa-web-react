@@ -169,7 +169,7 @@ export function Student () {
               <p>{numPages} sider</p>
               <Document file={`data:application/pdf;base64,${fileBase64}`} onContextMenu={e => e.preventDefault()} className='pdf-document' onLoadSuccess={onDocumentLoadSuccess} pageLayout=''>
                 {
-                  numPages > 0 && [...Array(numPages)].map((page, index) => <Page pageNumber={index + 1} scale={2} />)
+                  numPages > 0 && [...Array(numPages)].map((page, index) => <Page key={index} pageNumber={index + 1} scale={2} />)
                 }
                 {
                   numPages === 0 && <span>🤔</span>
