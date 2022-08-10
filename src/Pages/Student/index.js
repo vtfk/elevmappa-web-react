@@ -63,13 +63,6 @@ export function Student () {
     setNumPages(numPages)
   }
 
-  /* Features from old FrontEnd
-    - table is paginated to 10 items
-    - (check) on key up in searchfield, table is filtered to show documents by title (search value)
-    - (check) table has "Sendt dato" and Tittel
-    - (check) on expand, "Dok Nr", Fra and Til + button to show the document, is revealed
-    - (check) button opens document in a pdf viewer which doesn't allow you to right click and save
-  */
   return (
     <>
       {
