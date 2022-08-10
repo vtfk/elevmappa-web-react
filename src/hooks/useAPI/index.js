@@ -18,8 +18,9 @@ export function useAPI (endpoint, defaultOrderBy, defaultOrder, itemProps = []) 
         const data = await apiGet(`${API.URL}/${endpoint}`)
         setItems(data)
       } catch (error) {
+        // TODO: apiGet does not return full response on errors!! Make a change in react-msal ?
         console.error('Failed to get items from', endpoint)
-        // TODO: use Sentry here
+        // TODO: use Sentry here -- No point until react-msal return full response for errors aswell
         setItems([])
       }
       setLoading(false)
@@ -35,7 +36,7 @@ export function useAPI (endpoint, defaultOrderBy, defaultOrder, itemProps = []) 
     } catch (error) {
       // TODO: apiPost does not return full response on errors!! Make a change in react-msal ?
       console.error('Failed to fetch file', documentId, 'with recno', recno, `from '${source}'`)
-      // TODO: use Sentry here
+      // TODO: use Sentry here -- No point until react-msal return full response for errors aswell
       return null
     }
   }

@@ -55,7 +55,7 @@ export function Student () {
   const getDocumentFile = async (document, file) => {
     setDocumentFileLoading(file)
     const data = await getFile(document.source, document.documentNumber, file.recno, items.userName)
-    if (!data) console.error('Failed to retrieve file') // TODO: Add toast here? No point until react-msal return full response for errors aswell
+    if (!data) console.error('Failed to retrieve file') // TODO: Add toast here ? -- No point until react-msal return full response for errors aswell
     else {
       setFileBase64(data.file)
     }
