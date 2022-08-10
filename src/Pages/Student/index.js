@@ -3,7 +3,11 @@ import { Button, ErrorMessage, Icon, Modal, ModalBody, PersonCard, SearchField }
 import { useParams } from 'react-router-dom'
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack5'
 
+import { Pagination } from '../../components/Pagination'
+
 import { hasStudent, hasDocuments } from '../../lib/has-data'
+
+import { config } from '../../config'
 
 import { useAPI } from '../../hooks/useAPI'
 
@@ -37,6 +41,8 @@ export function Student () {
   const [fileBase64, setFileBase64] = useState(null)
   const [expandedDocument, setExpandedDocument] = useState('')
   const [documentFileLoading, setDocumentFileLoading] = useState('')
+  const [paginationFrom, setPaginationFrom] = useState(0)
+  const [paginationTo, setPaginationTo] = useState(config.documentsPrPage)
   const [numPages, setNumPages] = useState(0)
   // items will be a object if all goes well. If an error occurs, items will be an empty array
   const { documents, getFile, items, itemsOptions, loading, setItemsOptions } = useAPI(`students/${id}`, 'displayDate', 'desc', ['title'])
@@ -79,7 +85,7 @@ export function Student () {
             <div className='documents-container'>
               <div className='documents'>
                 {
-                  documents.map((document, index) => {
+                  (documents.length > config.documentsPrPage ? documents.slice(paginationFrom, paginationTo) : documents).map((document, index) => {
                     return (
                       <div className='document' key={index}>
                         <div className='document-header'>{document.title}</div>
@@ -119,11 +125,7 @@ export function Student () {
                 }
               </div>
 
-              <div className='pagination'>
-                <Button onClick={() => console.log('I will go back')} type='secondary2' size='small'><Icon name='arrowLeft' size='small' /></Button>
-                <div className='page active'>1</div>
-                <Button onClick={() => console.log('I will go forward')} type='secondary2' size='small'><Icon name='arrowRight' size='small' /></Button>
-              </div>
+              <Pagination totalItems={documents.length} itemsPrPage={config.documentsPrPage} onPageChange={(from, to) => { setPaginationFrom(from); setPaginationTo(to) }} />
             </div>
 
             {

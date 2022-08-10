@@ -1,0 +1,31 @@
+.students-container {
+  .students {
+    .students-header {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      padding: 10px 10px 10px 10px;
+      background-color: #b0c9d1;
+
+      .students-header-column {
+        font-weight: bold;
+      }
+    }
+    .student {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      padding: 10px 10px 10px 10px;
+      margin-bottom: 15px;
+      background-color: #F5F5F5;
+      box-shadow: 0 15px 13px 0 rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.error {
+  padding-top: 24px;
+  text-align: center;
+}

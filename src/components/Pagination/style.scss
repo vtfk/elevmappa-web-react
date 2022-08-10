@@ -1,0 +1,23 @@
+.pagination {
+  margin-top: 25px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+
+  .page {
+    border: 3px solid black;
+    padding: 8px 13px 8px 13px;
+    border-radius: 100%;
+    color: black;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &.active {
+      background-color: #B2DCDA;
+      border: 3px solid #B2DCDA;
+    }
+  }
+}

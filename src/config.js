@@ -1,5 +1,7 @@
 export const config = {
-  productOwner: process.env.REACT_APP_PRODUCT_OWNER || 'Vestfold og Telemark'
+  productOwner: process.env.REACT_APP_PRODUCT_OWNER || 'Vestfold og Telemark',
+  documentsPrPage: (process.env.REACT_APP_DOCUMENTS_PR_PAGE && Number.parseInt(process.env.REACT_APP_DOCUMENTS_PR_PAGE)) || 8,
+  studentsPrPage: (process.env.REACT_APP_STUDENTS_PR_PAGE && Number.parseInt(process.env.REACT_APP_STUDENTS_PR_PAGE)) || 10
 }
 
 export const API = {
