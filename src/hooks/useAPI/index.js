@@ -31,9 +31,9 @@ export function useAPI (endpoint, defaultOrderBy, defaultOrder, itemProps = []) 
   const getFile = async (source, documentId, recno, id) => {
     try {
       const data = await apiPost(`${API.URL}/file`, { source, documentId, recno, id }, true)
-      console.log('I got:', data)
       return data.data
     } catch (error) {
+      // TODO: apiPost does not return full response on errors!! Make a change in react-msal ?
       console.error('Failed to fetch file', documentId, 'with recno', recno, `from '${source}'`)
       // TODO: use Sentry here
       return null
