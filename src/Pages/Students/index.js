@@ -64,7 +64,10 @@ export function Students () {
                 }
               </div>
 
-              <Pagination totalItems={students.length} itemsPrPage={config.studentsPrPage} onPageChange={(from, to) => { setPaginationFrom(from); setPaginationTo(to) }} />
+              {
+                hasStudents(students) &&
+                  <Pagination totalItems={students.length} itemsPrPage={config.studentsPrPage} onPageChange={(from, to) => { setPaginationFrom(from); setPaginationTo(to) }} />
+              }
             </div>
 
             {
