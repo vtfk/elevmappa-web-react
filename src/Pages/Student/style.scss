@@ -58,6 +58,10 @@
 
       .file {
         margin-top: 10px;
+
+        &:hover {
+          background-color: #B2DCDA;
+        }
       }
 
       .empty-file {
