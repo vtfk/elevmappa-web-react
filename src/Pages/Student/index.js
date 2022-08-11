@@ -18,7 +18,8 @@ const PersonInfo = ({ person }) => {
     <PersonCard
       firstName={person.firstName}
       lastName={person.lastName}
-      largeName={person.fullname}>
+      largeName={person.fullname}
+    >
       <div className='extra-info'>
         <span>{person.mail}</span>
         <span>{person.mainGroupName}</span>
@@ -37,7 +38,7 @@ const InfoProp = ({ header, value }) => {
 }
 
 export function Student () {
-  const { id } = useParams()  
+  const { id } = useParams()
   const [fileBase64, setFileBase64] = useState(null)
   const [expandedDocument, setExpandedDocument] = useState('')
   const [documentFileLoading, setDocumentFileLoading] = useState('')
@@ -80,8 +81,9 @@ export function Student () {
               debounceMs={100}
               onSearch={e => setItemsOptions({ ...itemsOptions, filter: e.target.value })}
               placeholder='Søk i dokumenttittel'
-              showClear={false} />
-            
+              showClear={false}
+            />
+
             <div className='documents-container'>
               <div className='documents'>
                 {
@@ -140,7 +142,7 @@ export function Student () {
             </ErrorMessage>
           </>
       }
-      
+
       {
         !loading && !hasStudent(items) &&
           <ErrorMessage>
@@ -159,7 +161,8 @@ export function Student () {
           <Modal
             open
             title={`Dokumentvisning - ${documentFileLoading.file}`}
-            onDismiss={() => { setDocumentFileLoading(''); setFileBase64(null) }}>
+            onDismiss={() => { setDocumentFileLoading(''); setFileBase64(null) }}
+          >
             <ModalBody>
               <p>{numPages} sider</p>
               <Document file={`data:application/pdf;base64,${fileBase64}`} onContextMenu={e => e.preventDefault()} className='pdf-document' onLoadSuccess={onDocumentLoadSuccess} pageLayout=''>

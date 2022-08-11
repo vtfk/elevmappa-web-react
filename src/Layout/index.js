@@ -36,17 +36,20 @@ export function Layout () {
                   closeOnClick
                   icon={<Icon name='home' />}
                   onClick={() => navigate('/')}
-                  title='Hjem' />
+                  title='Hjem'
+                />
                 <IconDropdownNavItem
                   closeOnClick
                   icon={<Icon name='help' />}
                   onClick={() => navigate('help')}
-                  title='Hjelp' />
+                  title='Hjelp'
+                />
                 <IconDropdownNavItem
                   closeOnClick
                   icon={<Icon name='lock' />}
                   onClick={() => logout()}
-                  title='Logg av' />
+                  title='Logg av'
+                />
               </IconDropdownNav>
             </nav>
         }

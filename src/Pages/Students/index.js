@@ -44,7 +44,8 @@ export function Students () {
               loading={loading}
               onSearch={e => { setSearch(e.target.value); setItemsOptions({ ...itemsOptions, filter: e.target.value }) }}
               placeholder='Søk etter elev eller klasse'
-              showClear={false} />
+              showClear={false}
+            />
 
             <div className='students-container'>
               <div className='students'>
