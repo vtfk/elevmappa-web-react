@@ -87,6 +87,11 @@ export function Students () {
             Ta kontakt med administrativt personale på din skole dersom du mener dette er feil.
           </ErrorMessage>
       }
+
+      {
+        loading &&
+          <span>Henter elever...</span>
+      }
     </>
   )
 }
