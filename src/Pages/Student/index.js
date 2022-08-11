@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, ErrorMessage, Icon, Modal, ModalBody, PersonCard, SearchField } from '@vtfk/components'
+import { ErrorMessage, Icon, IconButton, Modal, ModalBody, PersonCard, SearchField } from '@vtfk/components'
 import { useParams } from 'react-router-dom'
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack5'
 
@@ -101,14 +101,7 @@ export function Student () {
                         {
                           expandedDocument === document.documentNumber && document.files.map(file => {
                             return (
-                              <div className='file' key={file.recno}>
-                                <Button size='small' disabled={documentFileLoading.recno === file.recno} onClick={() => { getDocumentFile(document, { file: document.documentNumber, recno: file.recno }) }} title='Klikk for å åpne filen'>
-                                  <div className='link-btn'>
-                                    <Icon name='pdf' size='small' />
-                                    {documentFileLoading.recno === file.recno ? 'Åpner dokumentet...' : file.title}
-                                  </div>
-                                </Button>
-                              </div>
+                              <IconButton className='file' key={file.recno} bordered icon='pdf' spinner={documentFileLoading.recno === file.recno} disabled={documentFileLoading.recno === file.recno} onClick={() => { getDocumentFile(document, { file: document.documentNumber, recno: file.recno }) }} title='Klikk for å åpne filen'>{documentFileLoading.recno === file.recno ? 'Åpner dokumentet...' : file.title}</IconButton>
                             )
                           })
                         }

@@ -50,12 +50,10 @@ export function Pagination ({ totalItems = 0, itemsPrPage = 10, onPageChange = d
 
   return (
     <div className='pagination'>
-      {/* <Button onClick={() => console.log('I will go back')} type='secondary2' size='small'><Icon name='arrowLeft' size='small' /></Button> */}
       <IconButton disabled={activeIndex === 0} bordered={false} icon='arrowLeft' onClick={() => onArrowClick('back')} />
       {
         getPages().map((page, index) => <div key={index} className={`page ${index === activeIndex ? 'active' : ''}`} onClick={() => onPageClick(index)}>{index + 1}</div>)
       }
-      {/* <Button onClick={() => console.log('I will go forward')} type='secondary2' size='small'><Icon name='arrowRight' size='small' /></Button> */}
       <IconButton disabled={activeIndex === (getPages().length - 1)} bordered={false} icon='arrowRight' onClick={() => onArrowClick('forward')} />
     </div>
   )
