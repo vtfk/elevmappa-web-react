@@ -17,7 +17,7 @@ export const AUTH = {
   },
   cache: {
     cacheLocation: 'sessionStorage',
-    storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
+    storeAuthStateInCookie: false // Set this to "true" if you are having issues on IE11 or Edge
   }
 }
 
