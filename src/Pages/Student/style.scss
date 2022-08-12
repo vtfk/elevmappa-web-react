@@ -65,6 +65,10 @@
         &:hover {
           background-color: #B2DCDA;
         }
+
+        &:disabled, &[disabled] {
+          background-color: inherit;
+        }
       }
 
       .empty-file {
