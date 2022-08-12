@@ -44,6 +44,9 @@
 
       .toggle {
         margin-top: 20px;
+        &:hover {
+          cursor: pointer;
+        }
       }
 
       .info {

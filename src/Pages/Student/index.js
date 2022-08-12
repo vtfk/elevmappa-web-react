@@ -41,7 +41,7 @@ export function Student () {
   const { id } = useParams()
   const [fileBase64, setFileBase64] = useState(null)
   const [expandedDocument, setExpandedDocument] = useState('')
-  const [documentFileLoading, setDocumentFileLoading] = useState('')
+  const [documentFileLoading, setDocumentFileLoading] = useState({})
   const [paginationFrom, setPaginationFrom] = useState(0)
   const [paginationTo, setPaginationTo] = useState(config.documentsPrPage)
   const [numPages, setNumPages] = useState(0)
@@ -56,14 +56,27 @@ export function Student () {
   const getDocumentFile = async (document, file) => {
     setDocumentFileLoading(file)
     const data = await getFile(document.source, document.documentNumber, file.recno, items.userName)
-    if (!data) console.error('Failed to retrieve file') // TODO: Add toast here ? -- No point until react-msal return full response for errors aswell
-    else {
+    if (!data) {
+      console.error('Failed to retrieve file') // TODO: Add toast here ? -- No point until react-msal return full response for errors aswell
+      setDocumentFileLoading({ ...documentFileLoading, error: 'Klarte ikke å åpne dokument' })
+    } else {
       setFileBase64(data.file)
     }
   }
 
   const getContactNames = (contacts, type) => {
     return contacts.filter(contact => contact.Role === type).map(contact => contact.SearchName).join(', ')
+  }
+
+  const getFileTitle = (document, file) => {
+    if (document.disableFiles) return `${file.title} - Ta kontakt med arkivet for å se filen`
+
+    if (documentFileLoading.recno === file.recno) {
+      if (!documentFileLoading.error) return 'Åpner dokumentet...'
+      else return `${file.title} - (${documentFileLoading.error})`
+    }
+
+    return file.title
   }
 
   function onDocumentLoadSuccess ({ numPages }) {
@@ -103,7 +116,17 @@ export function Student () {
                         {
                           expandedDocument === document.documentNumber && document.files.map(file => {
                             return (
-                              <IconButton className='file' key={file.recno} bordered icon='pdf' spinner={documentFileLoading.recno === file.recno} disabled={documentFileLoading.recno === file.recno} onClick={() => { getDocumentFile(document, { file: document.documentNumber, recno: file.recno }) }} title='Klikk for å åpne filen'>{documentFileLoading.recno === file.recno ? 'Åpner dokumentet...' : file.title}</IconButton>
+                              <IconButton
+                                className='file'
+                                key={file.recno}
+                                bordered
+                                icon={documentFileLoading.error ? 'error' : 'pdf'}
+                                spinner={documentFileLoading.recno === file.recno && !documentFileLoading.error}
+                                disabled={document.disableFiles || (documentFileLoading.recno === file.recno && !documentFileLoading.error)}
+                                onClick={() => { getDocumentFile(document, { file: document.documentNumber, recno: file.recno }) }}
+                                title={document.disableFiles ? 'Fil kun tilgjengelig i arkiv' : 'Klikk for å åpne filen'}
+                              >{getFileTitle(document, file)}
+                              </IconButton>
                             )
                           })
                         }
@@ -161,7 +184,7 @@ export function Student () {
           <Modal
             open
             title={`Dokumentvisning - ${documentFileLoading.file}`}
-            onDismiss={() => { setDocumentFileLoading(''); setFileBase64(null) }}
+            onDismiss={() => { setDocumentFileLoading({}); setFileBase64(null) }}
           >
             <ModalBody>
               <p>{numPages} sider</p>
