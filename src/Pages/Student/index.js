@@ -68,6 +68,17 @@ export function Student () {
     return contacts.filter(contact => contact.Role === type).map(contact => contact.SearchName).join(', ')
   }
 
+  const getFileTitle = (document, file) => {
+    if (document.disableFiles) return `${file.title} - Ta kontakt med arkivet for å se filen`
+
+    if (documentFileLoading.recno === file.recno) {
+      if (!documentFileLoading.error) return 'Åpner dokumentet...'
+      else return `${file.title} - (${documentFileLoading.error})`
+    }
+
+    return file.title
+  }
+
   function onDocumentLoadSuccess ({ numPages }) {
     setNumPages(numPages)
   }
@@ -111,10 +122,10 @@ export function Student () {
                                 bordered
                                 icon={documentFileLoading.error ? 'error' : 'pdf'}
                                 spinner={documentFileLoading.recno === file.recno && !documentFileLoading.error}
-                                disabled={documentFileLoading.recno === file.recno && !documentFileLoading.error}
+                                disabled={document.disableFiles || (documentFileLoading.recno === file.recno && !documentFileLoading.error)}
                                 onClick={() => { getDocumentFile(document, { file: document.documentNumber, recno: file.recno }) }}
-                                title='Klikk for å åpne filen'
-                              >{documentFileLoading.recno === file.recno && !documentFileLoading.error ? 'Åpner dokumentet...' : documentFileLoading.recno === file.recno && documentFileLoading.error ? documentFileLoading.error : file.title}
+                                title={document.disableFiles ? 'Fil kun tilgjengelig i arkiv' : 'Klikk for å åpne filen'}
+                              >{getFileTitle(document, file)}
                               </IconButton>
                             )
                           })
