@@ -4,6 +4,12 @@ export const config = {
   studentsPrPage: (process.env.REACT_APP_STUDENTS_PR_PAGE && Number.parseInt(process.env.REACT_APP_STUDENTS_PR_PAGE)) || 10
 }
 
+export const SENTRY = {
+  ENABLED: !!process.env.REACT_APP_SENTRY_DSN || false,
+  dsn: process.env.REACT_APP_SENTRY_DSN || process.env.SENTRY_DSN || false,
+  environment: process.env.REACT_APP_SENTRY_ENV || process.env.SENTRY_ENV || process.env.VERCEL_ENV || process.env.NODE_ENV || 'development'
+}
+
 export const API = {
   URL: process.env.REACT_APP_API_URL
 }
