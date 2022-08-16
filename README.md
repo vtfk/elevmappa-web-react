@@ -39,6 +39,10 @@ REACT_APP_SENTRY_DSN=%dsn-url%
 REACT_APP_SENTRY_ENV=production
 ```
 
+## Sentry
+
+This application uses [Sentry](http://sentry.io/) to log FrontEnd erros. To activate Sentry logging, add correct *dsn* (Data Source Name) from your Sentry project into `REACT_APP_SENTRY_DSN` in your `.env` file. *Environment is used from `NODE_ENV`, or it can be specified in `REACT_APP_SENTRY_ENV`.
+
 # Flow
 
 ![draw.io](https://i.imgur.com/fVFHw45.png)

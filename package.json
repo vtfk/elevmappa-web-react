@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@sentry/react": "7.10.0",
+    "@sentry/tracing": "7.10.0",
     "@vtfk/components": "0.12.1",
     "@vtfk/react-msal": "2.0.3",
     "lodash": "4.17.21",
