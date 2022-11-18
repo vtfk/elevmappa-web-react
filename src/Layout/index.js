@@ -56,6 +56,9 @@ export function Layout () {
       </div>
 
       <div className='content'>
+        <div className='infoBox'>
+          <strong>Info: </strong>I forbindelse med splittingen av fylket er det satt i gang en jobb med å se på tilgangsstyringer i ulike digitale løsninger. Vi har i denne sammenhengen startet arbeidet med å se på tilgangsstyringen i blant annet Elevmappa.
+        </div>
         <Routes>
           <Route path='/' element={<Students />} />
           <Route path='/students/:id' element={<Student />} />
