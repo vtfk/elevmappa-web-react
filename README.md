@@ -39,6 +39,9 @@ REACT_APP_SENTRY_DSN=%dsn-url%
 REACT_APP_SENTRY_ENV=production
 ```
 
+## Vercel preview
+If you need to test your code before deploying to Vercel, commit and push your changes to a branch named "preview". This will generate a preview deployment using the dev-api. The url for visiting the preview is [generated based on the branch name](https://vercel.com/docs/concepts/deployments/generated-urls#url-with-git-branch), and the branch-genereated url is also set up in the app registration for redirection, so you can test authentication as well.
+
 ## Sentry
 
 This application uses [Sentry](http://sentry.io/) to log FrontEnd erros. To activate Sentry logging, add correct *dsn* (Data Source Name) from your Sentry project into `REACT_APP_SENTRY_DSN` in your `.env` file. *Environment is used from `NODE_ENV`, or it can be specified in `REACT_APP_SENTRY_ENV`.
