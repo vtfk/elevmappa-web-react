@@ -14,15 +14,18 @@ import { useAPI } from '../../hooks/useAPI'
 import './style.scss'
 
 const PersonInfo = ({ person }) => {
+  const lastNameWithContactTeacher = person.contactTeacher ? `${person.lastName} (KL)` : person.lastName
+  const contactTeacherTxt = person.contactTeacher ? 'Du er kontaktlærer' : ''
   return (
     <PersonCard
       firstName={person.firstName}
-      lastName={person.lastName}
+      lastName={lastNameWithContactTeacher}
       largeName={person.fullname}
     >
       <div className='extra-info'>
         <span>{person.mail}</span>
         <span>{person.mainGroupName}</span>
+        <span>{contactTeacherTxt}</span>
       </div>
     </PersonCard>
   )
@@ -79,6 +82,10 @@ export function Student () {
     return file.title
   }
 
+  const canViewFile = (accessType, contactTeacher) => {
+    return accessType === 'groupAccess' || contactTeacher
+  }
+
   function onDocumentLoadSuccess ({ numPages }) {
     setNumPages(numPages)
   }
@@ -104,8 +111,10 @@ export function Student () {
                     return (
                       <div className='document' key={index}>
                         <div className='document-header'>{document.title}</div>
+                        <InfoProp header='Ansvarlig virksomhet' value={document.responsibleEnterprise || 'Ukjent'} />
                         <InfoProp header='Sendt dato' value={document.displayDate} />
                         <InfoProp header='Dok. nr.' value={`${document.documentNumber}${document.source ? ` (${document.source})` : ''}` || 'Ukjent'} />
+                        <InfoProp header='Dokumentarkiv' value={document.documentArchive || 'Ukjent'} />
                         <InfoProp header='Dokumentkategori' value={document.category || 'Ukjent'} />
                         <InfoProp header='Tilgangskode' value={document.accessCodeDescription || 'Ukjent'} />
                         <InfoProp header='Fra' value={getContactNames(document.contacts, 'Avsender')} />
@@ -114,20 +123,43 @@ export function Student () {
                           <Icon name={expandedDocument === document.documentNumber ? 'chevronUp' : 'chevronDown'} size='small' /> Filer ({document.files.length})
                         </div>
                         {
+                          expandedDocument === document.documentNumber && !canViewFile(items.accessType, items.contactTeacher) &&
+                          <div className="accessMessage">
+                            <br />
+                            <em><strong>OBS!</strong> {`Du er ikke kontaktlærer for ${items.firstName} ${items.lastName} og har derfor ikke tilgang til å åpne filer`}</em>
+                          </div>
+                        }
+                        {
                           expandedDocument === document.documentNumber && document.files.map(file => {
-                            return (
-                              <IconButton
-                                className='file'
-                                key={file.recno}
-                                bordered
-                                icon={documentFileLoading.error ? 'error' : 'pdf'}
-                                spinner={documentFileLoading.recno === file.recno && !documentFileLoading.error}
-                                disabled={document.disableFiles || (documentFileLoading.recno === file.recno && !documentFileLoading.error)}
-                                onClick={() => { getDocumentFile(document, { file: document.documentNumber, recno: file.recno }) }}
-                                title={document.disableFiles ? 'Fil kun tilgjengelig i arkiv' : 'Klikk for å åpne filen'}
-                              >{getFileTitle(document, file)}
-                              </IconButton>
-                            )
+                            if (canViewFile(items.accessType, items.contactTeacher)) {
+                              return (
+                                <IconButton
+                                  className='file'
+                                  key={file.recno}
+                                  bordered
+                                  icon={documentFileLoading.error ? 'error' : 'pdf'}
+                                  spinner={documentFileLoading.recno === file.recno && !documentFileLoading.error}
+                                  disabled={document.disableFiles || (documentFileLoading.recno === file.recno && !documentFileLoading.error)}
+                                  onClick={() => { getDocumentFile(document, { file: document.documentNumber, recno: file.recno }) }}
+                                  title={document.disableFiles ? 'Fil kun tilgjengelig i arkiv' : 'Klikk for å åpne filen'}
+                                >{getFileTitle(document, file)}
+                                </IconButton>
+                              )
+                            } else {
+                              return (
+                                <IconButton
+                                  className='file'
+                                  key={file.recno}
+                                  bordered
+                                  icon={documentFileLoading.error ? 'error' : 'pdf'}
+                                  spinner={documentFileLoading.recno === file.recno && !documentFileLoading.error}
+                                  disabled={true}
+                                  onClick={() => { getDocumentFile(document, { file: document.documentNumber, recno: file.recno }) }}
+                                  title={`Du er ikke kontaktlærer for ${items.firstName} ${items.lastName} og har derfor ikke tilgang til å åpne filen`}
+                                >{getFileTitle(document, file)}
+                                </IconButton>
+                              )
+                            }
                           })
                         }
 
