@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Icon, IconDropdownNav, IconDropdownNavItem, InitialsBadge } from '@vtfk/components'
 import { useSession } from '@vtfk/react-msal'
 import { Routes, Route, useNavigate } from 'react-router-dom'
@@ -14,6 +15,7 @@ import './style.scss'
 export function Layout () {
   const { isAuthenticated, logout, user } = useSession()
   const navigate = useNavigate()
+  const [showInfoMsg, setShowInfoMsg] = useState(true)
 
   return (
     <div className='layout'>
@@ -56,9 +58,15 @@ export function Layout () {
       </div>
 
       <div className='content'>
-        <div className='infoBox'>
-          <strong>Info: </strong>I forbindelse med splittingen av fylket er det satt i gang en jobb med å se på tilgangsstyringer i ulike digitale løsninger. Vi har i denne sammenhengen startet arbeidet med å se på tilgangsstyringen i blant annet Elevmappa.
-        </div>
+        {
+          showInfoMsg &&
+            <div className='infoBox'>
+              <p>
+                <strong>Info: </strong>I forbindelse med splittingen av fylket er det satt i gang en jobb med å se på tilgangsstyringer i ulike digitale løsninger. Vi har i denne sammenhengen startet arbeidet med å se på tilgangsstyringen i blant annet Elevmappa. Som resultat av dette arbeidet vil det bli innført noen endringer i elevmappa fra og med <strong>fredag 31. mars kl. 15:00</strong>. Dere vil få mer informasjon om denne endringen ved egen skole. 
+              </p>
+              <p class="butt" onClick={() => { setShowInfoMsg(false) }}>Lukk info</p>
+            </div>
+        }
         <Routes>
           <Route path='/' element={<Students />} />
           <Route path='/students/:id' element={<Student />} />
