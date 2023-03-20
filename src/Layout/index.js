@@ -62,7 +62,14 @@ export function Layout () {
           showInfoMsg &&
             <div className='infoBox'>
               <p>
-                <strong>Info: </strong>I forbindelse med splittingen av fylket er det satt i gang en jobb med å se på tilgangsstyringer i ulike digitale løsninger. Vi har i denne sammenhengen startet arbeidet med å se på tilgangsstyringen i blant annet Elevmappa. Som resultat av dette arbeidet vil det bli innført noen endringer i elevmappa fra og med <strong>fredag 31. mars kl. 15:00</strong>. Dere vil få mer informasjon om denne endringen ved egen skole. 
+                <strong>Informasjon om endring i tilgangsstyring</strong><br />
+                <ul>
+                  <li>Dette er en løsning som gir oversikt over eller lesetilgang til elevdokumenter som ligger arkivert i fylkets sak -og arkivsystem ("P360").</li>
+                  <li>Kontaktlærer har lesetilgang til elevdokumenter tilknyttet kontaktelever.</li>
+                  <li>Faglærer får se en oversikt over titlene på elevdokumentene, og må derfor henvende seg til sin nærmeste leder ved tjenstlig behov for å lese et dokument. Leder åpner dokumentet i "P360" og lar faglærer lese det.</li>
+                  <li>Alle oppslag i elevdokumenter loggføres av systemet.</li>
+                  <li>Løsningen har fått nytt navn, og heter nå "Elevdok".</li>
+                </ul>
               </p>
               <p class="butt" onClick={() => { setShowInfoMsg(false) }}>Lukk info</p>
             </div>
