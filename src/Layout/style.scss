@@ -54,8 +54,20 @@
 
     .infoBox {
       margin-bottom: 25px;
-      padding: 16px;
+      padding: 8px 16px;
       background-color: #F0E1BD;
+      p {
+        padding: 0px;
+        margin: 8px 0 0 0;
+      }
+      .butt {
+        display: inline-block;
+        cursor: pointer;
+        color: #005260;
+      }
+      .butt:hover {
+        text-decoration: underline;
+      }
     }
 
   }
