@@ -23,7 +23,7 @@ export function Layout () {
             <img alt='logo' src='/logo.png' height='40px' width='40px' />
           </div>
           <div className='text' onClick={() => navigate('/')}>
-            Elevmappa
+            Elevdok (tidligere Elevmappa)
           </div>
         </div>
 
