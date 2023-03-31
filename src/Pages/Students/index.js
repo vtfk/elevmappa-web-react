@@ -57,7 +57,7 @@ export function Students () {
                   (students.length > config.studentsPrPage ? students.slice(paginationFrom, paginationTo) : students).map((student, index) => {
                     return (
                       <div className='student' key={index} onClick={() => handleStudentClick(student.userName)}>
-                        <div className='student-name' title='Navn'>{student.fullName}</div>
+                        <div className='student-name' title={student.contactTeacher ? 'Du er kontaktlærer for denne eleven' : 'Du er ikke kontaktlærer for denne eleven'}>{student.fullName} <strong>{student.contactTeacher ? '(KL)' : ''}</strong></div>
                         <div className='student-class' title='Klasse'>{student.mainGroupName}</div>
                       </div>
                     )
